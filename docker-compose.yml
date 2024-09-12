@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+
+  minio:
+    image: quay.io/minio/minio:RELEASE.2024-08-29T01-40-52Z
+    hostname: minio
+    command: ["server", "/data", "--console-address", ":9090"]
+    networks:
+      - minio
+    ports:
+      - 9000:9000 # API
+      - 9090:9090 # WebUI
+    env_file:
+      - ./.env
+    environment:
+      MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID:?}
+      MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY:?}
+      MINIO_UPDATE: off
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    volumes:
+      - ./minio/data:/data
+    user: "${HOST_UID:?please add your user id to the .env file}:${HOST_GID:?please add your group id to the .env file}"
+
+  minio_init_script:
+    image: quay.io/minio/mc:latest
+    depends_on:
+      - minio
+    networks:
+      - minio
+    env_file:
+      - ./.env
+    entrypoint: >
+      /bin/sh -c '
+      sleep 5;
+      /usr/bin/mc config host add s3 http://minio:9000 ${AWS_ACCESS_KEY_ID:?} ${AWS_SECRET_ACCESS_KEY:?} --api S3v4;
+      /usr/bin/mc mb --ignore-existing --region=${AWS_DEFAULT_REGION:?} s3/${S3_BUCKET_NAME:?};
+      exit 0;
+      '
+
+networks:
+  minio:
+    driver: bridge
