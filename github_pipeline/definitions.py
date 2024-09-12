@@ -6,6 +6,7 @@ from dagster import (
 )
 
 from . import assets
+from .resources import GitHubAPIResource
 
 
 all_assets = load_assets_from_modules([assets])
@@ -16,4 +17,7 @@ github_job = define_asset_job(name='refresh_repository_report', selection=AssetS
 defs = Definitions(
     assets=all_assets,
     jobs=[github_job],
+    resources={
+        'github_api': GitHubAPIResource(),
+    },
 )
