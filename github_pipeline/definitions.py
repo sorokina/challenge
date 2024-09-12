@@ -1,11 +1,14 @@
 from dagster import (
     AssetSelection,
     Definitions,
+    EnvVar,
     define_asset_job,
     load_assets_from_modules,
 )
+from dagster_aws.s3 import s3_resource
 
 from . import assets
+from .io_managers import s3_json_io_manager
 from .resources import GitHubAPIResource
 
 
@@ -19,5 +22,7 @@ defs = Definitions(
     jobs=[github_job],
     resources={
         'github_api': GitHubAPIResource(),
+        'json_io_manager': s3_json_io_manager.configured({'s3_bucket': EnvVar('S3_BUCKET_NAME').get_value()}),
+        's3': s3_resource,
     },
 )
