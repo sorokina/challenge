@@ -8,9 +8,8 @@ from dagster import (
 from dagster_aws.s3 import s3_resource
 
 from . import assets
-from .io_managers import s3_json_io_manager
+from .io_managers import s3_io_manager
 from .resources import GitHubAPIResource
-
 
 all_assets = load_assets_from_modules([assets])
 
@@ -22,7 +21,12 @@ defs = Definitions(
     jobs=[github_job],
     resources={
         'github_api': GitHubAPIResource(),
-        'json_io_manager': s3_json_io_manager.configured({'s3_bucket': EnvVar('S3_BUCKET_NAME').get_value()}),
+        'json_io_manager': s3_io_manager.configured(
+            {'data_type': 'json', 's3_bucket': EnvVar('S3_BUCKET_NAME').get_value()}
+        ),
+        'text_io_manager': s3_io_manager.configured(
+            {'data_type': 'text', 's3_bucket': EnvVar('S3_BUCKET_NAME').get_value()}
+        ),
         's3': s3_resource,
     },
 )
