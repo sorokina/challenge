@@ -1,12 +1,16 @@
 from typing import Any
 
+import pandas as pd
 from dagster import (
     AssetExecutionContext,
+    AssetIn,
+    AssetKey,
     FreshnessPolicy,
     MetadataValue,
     asset,
 )
 
+from .ops import extract_metadata
 from .resources import GitHubAPIResource
 
 
@@ -71,3 +75,38 @@ def hudi_rs_metadata(context: AssetExecutionContext, github_api: GitHubAPIResour
     )
 
     return repo_metadata
+
+
+@asset(
+    key_prefix=['dm', 'reports'],
+    ins={
+        'delta_rs': AssetIn(AssetKey('delta-rs_repo_metadata')),
+        'iceberg_python': AssetIn(AssetKey('iceberg-python_repo_metadata')),
+        'hudi_rs': AssetIn(AssetKey('hudi-rs_repo_metadata')),
+    },
+    io_manager_key='text_io_manager',
+    op_tags={'file_extension': '.md'},
+    group_name='github',
+)
+def repo_report(
+    context: AssetExecutionContext, delta_rs: dict[str, Any], iceberg_python: dict[str, Any], hudi_rs: dict[str, Any]
+) -> str:
+    """Report for comparing GitHub repositories."""
+
+    report_data = {
+        'delta-rs': extract_metadata(repo_matadata=delta_rs),
+        'iceberg-python': extract_metadata(repo_matadata=iceberg_python),
+        'hudi-rs': extract_metadata(repo_matadata=hudi_rs),
+    }
+
+    # use pandas to convert dict with report data to markdown table
+    df_report = pd.DataFrame.from_dict(report_data)
+    md_report = df_report.to_markdown()
+
+    context.add_output_metadata(
+        metadata={
+            'report': MetadataValue.md(md_report),
+        }
+    )
+
+    return md_report
