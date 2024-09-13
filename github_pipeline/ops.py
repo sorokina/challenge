@@ -5,16 +5,15 @@ from dagster import op
 
 @op
 def extract_metadata(repo_matadata: dict[str, Any]) -> dict[str, Any]:
-    """
-    Downloads the PDF document from the document URL and uploads it to OBS.
+    """Extracts list of fields from the repo metatdata and adds them to the report data dict.
 
     Args:
-        - document_url (str): \
-            Link to the document.
-        - entry_id (str): \
-            ID of the Contentful entry.
-        - client (BaseClient): \
-            A boto3 S3 client.
+        - document_url (dict[str, Any]): \
+            Metadata object for a GitHub repository.
+
+    Returns:
+        - dict[str, Any]: \
+            Extracted data for the report.
     """
     extracted_data = {
         'stars': repo_matadata.get('stargazers_count'),
