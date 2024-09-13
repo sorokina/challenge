@@ -50,3 +50,24 @@ def iceberg_python_metadata(context: AssetExecutionContext, github_api: GitHubAP
     )
 
     return repo_metadata
+
+
+@asset(
+    name='hudi-rs_repo_metadata',
+    key_prefix=['stage', 'github', 'repositories', 'apache', 'hudi-rs'],
+    io_manager_key='json_io_manager',
+    group_name='github',
+    freshness_policy=FreshnessPolicy(maximum_lag_minutes=60 * 24),  # 24 hours
+)
+def hudi_rs_metadata(context: AssetExecutionContext, github_api: GitHubAPIResource) -> dict[str, Any]:
+    """Metadata from the GitHub repository of the Hudi Python client."""
+    repo_metadata = github_api.get_repository(owner='apache', repo='hud-rs')
+
+    context.add_output_metadata(
+        metadata={
+            'repo link': MetadataValue.url(repo_metadata.get('html_url')),
+            'data preview': MetadataValue.json(repo_metadata),
+        }
+    )
+
+    return repo_metadata
