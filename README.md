@@ -7,20 +7,20 @@ The report compares the developer communities of the Python clients for three la
 * Apache Iceberg ([iceberg-python](https://github.com/apache/iceberg-python))
 * Delta Lake ([delta-rs](https://github.com/delta-io/delta-rs))
 
-The report has the following format (example data as of 2024-09-12):
+The report has the following format (example data as of 2024-09-16):
 |                                 | delta-rs | iceberg-python | hudi-rs |
-|---------------------------------|----------|----------------|---------|
-| stars                           | 2144     | 378            | 134     |
-| forks                           | 380      | 138            | 28      |
-| watchers                        | 2144     | 29             | 18      |
-| open issues                     | 211      | 122            | 24      |
-| closed issues                   | 876      | 224            | 23      |
-| avg days until issue was closed | ...      | ...            | ...     |
-| open PRs                        | 22       | 52             | 16      |
-| closed PRs                      | 1667     | 767            | 73      |
-| avg days until PR was closed    | ...      | ...            | ...     |
-| number of contributors          | 174      | 116            | 7       |
-> *Note*: The avg days KPIs should be rounded to one decimal place (e.g. `5.1`). The average days, how long an issue or PR was open, should be calculated by subtracting the field `created_at` from `closed_at` per item and calculate the overall mean value.
+|---------------------------------|---------:|---------------:|--------:|
+| stars                           | 2153     | 383            | 136     |
+| forks                           | 384      | 140            | 28      |
+| watchers                        | 37       | 29             | 18      |
+| releases                        | 73       | 5              | 1       |
+| open issues                     | 209      | 123            | 26      |
+| closed issues                   | 879      | 226            | 24      |
+| avg days until issue was closed | 122.1    | 45.6           | 10.6    |
+| open PRs                        | 19       | 54             | 10      |
+| closed PRs                      | 1676     | 774            | 83      |
+| avg days until PR was closed    | 8.8      | 6.1            | 4.2     |
+> *Note*: The avg days KPIs should be rounded to one decimal place. The average days, how long an issue or PR was open, should be calculated by subtracting the field `created_at` from `closed_at` per item and calculate the overall mean value.
 
 
 ## Getting Started

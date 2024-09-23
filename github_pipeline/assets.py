@@ -1,6 +1,5 @@
 from typing import Any
 
-import pandas as pd
 from dagster import (
     AssetExecutionContext,
     AssetIn,
@@ -10,8 +9,8 @@ from dagster import (
     asset,
 )
 
-from .ops import extract_metadata
 from .resources import GitHubAPIResource
+from .utils import create_markdown_report, extract_metadata
 
 
 @asset(
@@ -98,14 +97,4 @@ def repo_report(
         'hudi-rs': extract_metadata(repo_matadata=hudi_rs),
     }
 
-    # use pandas to convert dict with report data to markdown table
-    df_report = pd.DataFrame.from_dict(report_data)
-    md_report = df_report.to_markdown()
-
-    context.add_output_metadata(
-        metadata={
-            'report': MetadataValue.md(md_report),
-        }
-    )
-
-    return md_report
+    return create_markdown_report(context=context, report_data=report_data)
