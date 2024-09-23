@@ -25,16 +25,14 @@ ruff = ">=0.5.1"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[project]
-# Ruff makes sure that code is Python 3.10+ compliant
-requires-python = ">= 3.10"
-
 [tool.dagster]
 module_name = "github_pipeline.definitions"
 code_location_name = "GitHub Reporting"
 
 [tool.ruff]
 line-length = 120
+# Always generate Python 3.10-compatible code.
+target-version = "py310"
 
 [tool.ruff.format]
 quote-style = "single"

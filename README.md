@@ -58,17 +58,17 @@ poetry install --sync
 
 Create a local folder for MinIO:
 ```bash
-mkdir -p minio/data
+mkdir -p data/minio
 ```
 Start MinIO:
 ```bash
 docker compose up
 ```
 When you see this message, the setup is completed:
-```
-Bucket created successfully `s3/data-lake-local`.
-```
-Press `Ctrl`+`C` to stop docker compose after the setup is completed.
+
+> Bucket created successfully \`s3/data-lake-local\`.
+
+Press `Ctrl`+`C` to terminate MinIO after the setup is completed.
 
 
 ## Development
@@ -114,6 +114,10 @@ aws s3 --endpoint-url http://localhost:9000 ls --recursive s3://data-lake-local
 docker compose down
 ```
 
-**To stop the Dagster Web UI**:  
+**To stop the Dagster Web UI**:
+
+*For debugging mode in VS Code:* 
+Terminate the debugging mode and stop the Dagster webserver by pressing `Shift`+`F5`.
+
+*When you have started Dagster in the shell:* 
 Press `Ctrl`+`C` in the terminal window, where the dagster process was started.
-(for debugging mode in VS Code): Terminate the debugging mode and stop the Dagster webserver by pressing `Shift`+`F5`.

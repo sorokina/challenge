@@ -12,7 +12,9 @@
             "args": [
                 "dev",
             ],
-            "subProcess": true
+            "subProcess": true,
+            // uncomment next line, if you need to debug dagster more deeply
+            // "justMyCode": false
         },
     ]
 }

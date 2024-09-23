@@ -7,7 +7,7 @@ services:
     hostname: minio
     command: ["server", "/data", "--console-address", ":9090"]
     networks:
-      - minio
+      - dagster
     ports:
       - 9000:9000 # API
       - 9090:9090 # WebUI
@@ -23,7 +23,7 @@ services:
       timeout: 20s
       retries: 3
     volumes:
-      - ./minio/data:/data
+      - ./data/minio:/data
     user: "${HOST_UID:?please add your user id to the .env file}:${HOST_GID:?please add your group id to the .env file}"
 
   minio_init_script:
@@ -31,7 +31,7 @@ services:
     depends_on:
       - minio
     networks:
-      - minio
+      - dagster
     env_file:
       - ./.env
     entrypoint: >
@@ -43,5 +43,5 @@ services:
       '
 
 networks:
-  minio:
+  dagster:
     driver: bridge

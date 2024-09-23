@@ -1,5 +1,7 @@
 ## application specific ignore rules
-minio/
+data/
+dagster/*
+!dagster/dagster.yaml
 tmp*/
 
 
