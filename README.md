@@ -49,6 +49,11 @@ cp .env.template .env
 ```
 Open the `.env` file and set the correct environment variables for the user and group id.
 
+Later, you could add a GitHub API access token as well. For running the job for the first time,
+the rate-limiting of the unauthenticated access is enough (60 calls per hour).
+For creating a GitHub token, you need a GitHub account.
+Visit this page to create a personal access token: https://github.com/settings/tokens
+
 3. **Install virtual environment:**
 ```bash
 poetry install --sync

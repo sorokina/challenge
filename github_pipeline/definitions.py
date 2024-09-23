@@ -20,7 +20,7 @@ defs = Definitions(
     assets=all_assets,
     jobs=[github_job],
     resources={
-        'github_api': GitHubAPIResource(),
+        'github_api': GitHubAPIResource(github_token=EnvVar('GITHUB_TOKEN').get_value()),
         'json_io_manager': s3_io_manager.configured(
             {'data_type': 'json', 's3_bucket': EnvVar('S3_BUCKET_NAME').get_value()}
         ),

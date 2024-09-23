@@ -1,4 +1,4 @@
-from typing import Any, Generator, Optional
+from typing import Any, Generator
 from urllib.parse import urljoin
 
 import requests
@@ -9,9 +9,14 @@ class GitHubAPIResource(ConfigurableResource):
     """Custom Dagster resource for the GitHub REST API.
 
     Args:
+        - github_token (str | None, optional): \
+            GitHub token for authentication. If no token is set, the API calls will be without authentication.
         - host (str, optional): \
             Host address of the Contentful Management API. Defaults to 'https://api.github.com'.
     """
+
+    github_token: str | None = None
+    """GitHub token for authentication. If no token is set, the API calls will be without authentication."""
 
     host: str = 'https://api.github.com'
     """Host of the GitHub REST API."""
@@ -20,7 +25,7 @@ class GitHubAPIResource(ConfigurableResource):
         self,
         method: str,
         path: str,
-        params: dict | None = None,
+        params: dict | list[tuple] | None = None,
         json: Any | None = None,
     ) -> requests.Response:
         """Execute a request to the GitHub REST API.
@@ -30,14 +35,18 @@ class GitHubAPIResource(ConfigurableResource):
                 HTTP method for the API call, e.g. 'GET'.
             - path (str): \
                 Path of the endpoint.
-            - params (dict, optional): \
-                Dictionary, list of tuples or bytes to send in the query string for the request.
+            - params (dict | list[tuple], optional): \
+                Dictionary or list of tuples to send as query parameters in the request.
             - json (Any, optional): \
                 A JSON serializable Python object to send in the body of the request.
 
         Returns:
             - requests.Response: \
                 Response object of the API call.
+
+        Raises:
+            - requests.HTTPError: \
+                When HTTP 4xx or 5xx response is received.
         """
         if params is None:
             params = {}
@@ -45,12 +54,16 @@ class GitHubAPIResource(ConfigurableResource):
         # passed parameters win over the default parameters
         params = {**default_params, **params}
 
+        headers = {'Accept': 'application/vnd.github+json'}
+        if self.github_token:
+            headers['Authorization'] = f'Bearer {self.github_token}'
+
         try:
             response = requests.request(
                 method=method,
                 url=urljoin(self.host, path),
                 params=params,
-                headers={'Accept': 'application/vnd.github+json'},
+                headers=headers,
                 json=json,
             )
             get_dagster_logger().info(f'Call {method}: {response.url}')
