@@ -6,12 +6,8 @@ from typing import TYPE_CHECKING, Any
 from dagster import (
     InitResourceContext,
     InputContext,
-    MetadataValue,
     OutputContext,
     io_manager,
-)
-from dagster import (
-    _check as check,
 )
 from dagster_aws.s3 import PickledObjectS3IOManager
 from upath import UPath
@@ -33,6 +29,10 @@ class JsonObjectS3IOManager(PickledObjectS3IOManager):
     """
 
     extension: str = '.json'
+    """
+    File extension, which is used to materialize files (e.g. `".json"`).
+    If `None`, file is saved without any extension.
+    """
 
     def load_from_path(self, context: InputContext, path: UPath) -> Any:
         """Loads JSON serializable object from S3 path.
@@ -107,37 +107,15 @@ class TextObjectS3IOManager(PickledObjectS3IOManager):
         - s3_session (S3Client): \
             S3 client object created from `boto3.client("s3")`.
         - s3_prefix (str): \
-            Additional path prefix for objects in the bucket. Otherwise, should be set to empty string `''`, but not to `None`.
+            Additional path prefix for objects in the bucket.
+            Otherwise, should be set to empty string `''`, but not to `None`.
     """
 
     extension: str = '.txt'
-
-    def get_path(self, context: InputContext | OutputContext) -> UPath:
-        # set custom extension
-        self.extension = context.op_def.tags.get('file_extension', '.txt')
-
-        # rebuild path
-        if context.has_asset_partitions:
-            paths = self._get_paths_for_partitions(context)
-
-            check.invariant(
-                len(paths) == 1,
-                f'The current IO manager {type(self)} does not support persisting an output'
-                ' associated with multiple partitions. This error is likely occurring because a'
-                " backfill was launched using the 'single run' option. Instead, launch the"
-                " backfill with the 'multiple runs' option.",
-            )
-
-            path = next(iter(paths.values()))
-            self._handle_transition_to_partitioned_asset(context, path.parent)
-        else:
-            path = self._get_path(context)
-
-        # update path in metadata, if it exists
-        if context.metadata.get('path'):
-            context.metadata['path'] = MetadataValue.path(str(path))
-
-        return path
+    """
+    File extension, which is used to materialize files (e.g. `".txt"`).
+    If `None`, file is saved without any extension.
+    """
 
     def load_from_path(self, context: InputContext, path: UPath) -> Any:
         """Loads text content of object from S3 path.
@@ -154,8 +132,6 @@ class TextObjectS3IOManager(PickledObjectS3IOManager):
         Raises:
             - botocore.exceptions.NoSuchKey: When the file was not found in the S3 bucket.
         """
-        # get path with custom file extension
-        path = self.get_path(context=context)
         try:
             s3_client: 'S3Client' = self.s3
             s3_obj = s3_client.get_object(Bucket=self.bucket, Key=path.as_posix())
@@ -175,8 +151,6 @@ class TextObjectS3IOManager(PickledObjectS3IOManager):
             - path (upath.UPath): \
                 Path under which the objects should be saved in the S3 bucket.
         """
-        # get path with custom file extension
-        path = self.get_path(context=context)
         s3_client: 'S3Client' = self.s3
         text_bytes = obj.encode('utf-8')
         # save normal json file (which gets overwritten on every dagster run)
@@ -214,9 +188,9 @@ def s3_io_manager(init_context: InitResourceContext) -> JsonObjectS3IOManager:
     - `pickle`: everthing else would be stored as pickled object as `<asset_key>.pkl`
 
     Needs following config values:
-    - data_type (str): data type from list above, defaults to 'pickle'
     - s3_bucket (str): name of the S3 bucket, the data should be stored in
     - (optional) s3_prefix (str): Additional path prefix for objects in the bucket
+    - (optional) data_type (str): data type from list above, defaults to 'pickle'
     - (optional) file_extension (str): custom file extension e.g. '.md', otherwise default will be used (see list above)
 
     Saves file-based objects. Suitable for object storage for distributed executors, so long
@@ -283,7 +257,7 @@ def s3_io_manager(init_context: InitResourceContext) -> JsonObjectS3IOManager:
             S3 IO Manager for handling files.
     """
     s3_session = init_context.resources.s3
-    data_type = init_context.resource_config['data_type']
+    data_type = init_context.resource_config.get('data_type', 'pickle')  # optional
     s3_bucket = init_context.resource_config['s3_bucket']
     s3_prefix = init_context.resource_config.get('s3_prefix', '')  # should be set to empty string '', not to None.
     file_extension = init_context.resource_config.get('file_extension')  # optional
@@ -292,8 +266,15 @@ def s3_io_manager(init_context: InitResourceContext) -> JsonObjectS3IOManager:
         io_manager = JsonObjectS3IOManager(s3_bucket=s3_bucket, s3_session=s3_session, s3_prefix=s3_prefix)
     elif data_type == 'text':
         io_manager = TextObjectS3IOManager(s3_bucket=s3_bucket, s3_session=s3_session, s3_prefix=s3_prefix)
-    else:
+    elif data_type == 'pickle':
         io_manager = PickledObjectS3IOManager(s3_bucket=s3_bucket, s3_session=s3_session, s3_prefix=s3_prefix)
+        # set as default extension, because otherwise PickledObjectS3IOManager saves data without any file ending
+        io_manager.extension = '.pkl'
+    else:
+        raise ValueError(
+            f'Invalid config value for option "data_type": Given was "{data_type}". '
+            'Allowed are "json", "pickle", and "text".',
+        )
 
     # set custom file extension
     if file_extension:

@@ -84,8 +84,7 @@ def hudi_rs_metadata(context: AssetExecutionContext, github_api: GitHubAPIResour
         'iceberg_python': AssetIn(AssetKey('iceberg-python_repo_metadata')),
         'hudi_rs': AssetIn(AssetKey('hudi-rs_repo_metadata')),
     },
-    io_manager_key='text_io_manager',
-    op_tags={'file_extension': '.md'},
+    io_manager_key='md_io_manager',
     group_name='github',
 )
 def repo_report(

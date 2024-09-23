@@ -24,8 +24,8 @@ defs = Definitions(
         'json_io_manager': s3_io_manager.configured(
             {'data_type': 'json', 's3_bucket': EnvVar('S3_BUCKET_NAME').get_value()}
         ),
-        'text_io_manager': s3_io_manager.configured(
-            {'data_type': 'text', 's3_bucket': EnvVar('S3_BUCKET_NAME').get_value()}
+        'md_io_manager': s3_io_manager.configured(
+            {'data_type': 'text', 'file_extension': '.md', 's3_bucket': EnvVar('S3_BUCKET_NAME').get_value()}
         ),
         's3': s3_resource,
     },
