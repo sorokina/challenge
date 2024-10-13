@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GitHub Reporting Pipeline
 
 This repository contains a pipeline to fetch data from the GitHub REST API and create a simple report.
@@ -126,3 +127,6 @@ Terminate the debugging mode and stop the Dagster webserver by pressing `Shift`+
 
 *When you have started Dagster in the shell:* 
 Press `Ctrl`+`C` in the terminal window, where the dagster process was started.
+=======
+# de-coding-challenge
+>>>>>>> cdde42c99dea0d8267ea5c61d81e6d4b97c1be8a

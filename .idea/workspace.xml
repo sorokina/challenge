@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ca1f5279-0d2e-433e-9a21-cca777dc1279" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github_pipeline/assets.py" beforeDir="false" afterPath="$PROJECT_DIR$/github_pipeline/assets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github_pipeline/resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/github_pipeline/resources.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github_pipeline/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/github_pipeline/utils.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2nBvNtOv5QEsbqD9d4wlAT878eK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" singleton="false">
+      <module name="de-coding-challenge" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../IDEALO TEST/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ca1f5279-0d2e-433e-9a21-cca777dc1279" name="Default Changelist" comment="" />
+      <created>1728459247168</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728459247168</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="491" y="23" key="#Tets" timestamp="1728655450932">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state x="491" y="23" key="#Tets/0.23.1440.827@0.23.1440.827" timestamp="1728655450932" />
+    <state x="491" y="23" key="#Unnamed" timestamp="1728655409865">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state x="491" y="23" key="#Unnamed/0.23.1440.827@0.23.1440.827" timestamp="1728655409865" />
+    <state x="249" y="33" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1728655383826">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state x="249" y="33" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.827@0.23.1440.827" timestamp="1728655383826" />
+    <state width="1112" height="144" key="GridCell.Tab.0.bottom" timestamp="1728756722481">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state width="1112" height="144" key="GridCell.Tab.0.bottom/0.23.1440.827@0.23.1440.827" timestamp="1728756722481" />
+    <state width="1112" height="144" key="GridCell.Tab.0.center" timestamp="1728756722480">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state width="1112" height="144" key="GridCell.Tab.0.center/0.23.1440.827@0.23.1440.827" timestamp="1728756722480" />
+    <state width="1112" height="144" key="GridCell.Tab.0.left" timestamp="1728756722480">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state width="1112" height="144" key="GridCell.Tab.0.left/0.23.1440.827@0.23.1440.827" timestamp="1728756722480" />
+    <state width="1112" height="144" key="GridCell.Tab.0.right" timestamp="1728756722481">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state width="1112" height="144" key="GridCell.Tab.0.right/0.23.1440.827@0.23.1440.827" timestamp="1728756722481" />
+    <state width="1112" height="181" key="GridCell.Tab.1.bottom" timestamp="1728655515914">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state width="1112" height="181" key="GridCell.Tab.1.bottom/0.23.1440.827@0.23.1440.827" timestamp="1728655515914" />
+    <state width="1112" height="181" key="GridCell.Tab.1.center" timestamp="1728655515912">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state width="1112" height="181" key="GridCell.Tab.1.center/0.23.1440.827@0.23.1440.827" timestamp="1728655515912" />
+    <state width="1112" height="181" key="GridCell.Tab.1.left" timestamp="1728655515911">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state width="1112" height="181" key="GridCell.Tab.1.left/0.23.1440.827@0.23.1440.827" timestamp="1728655515911" />
+    <state width="1112" height="181" key="GridCell.Tab.1.right" timestamp="1728655515913">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state width="1112" height="181" key="GridCell.Tab.1.right/0.23.1440.827@0.23.1440.827" timestamp="1728655515913" />
+    <state x="293" y="23" key="SettingsEditor" timestamp="1728655506583">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state x="293" y="23" key="SettingsEditor/0.23.1440.827@0.23.1440.827" timestamp="1728655506583" />
+    <state x="404" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1728634887572">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state x="404" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.827@0.23.1440.827" timestamp="1728634887572" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/github_pipeline/utils.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -30,7 +30,7 @@ def create_markdown_report(context: AssetExecutionContext, report_data: dict[str
     return md_report
 
 
-def extract_metadata(repo_matadata: dict[str, Any]) -> dict[str, Any]:
+def extract_metadata(repo_metadata: dict[str, Any]) -> dict[str, Any]:
     """Extracts list of fields from the repo metatdata, issues and PRs and adds them to the report data dict.
 
     Args:
@@ -42,17 +42,18 @@ def extract_metadata(repo_matadata: dict[str, Any]) -> dict[str, Any]:
             Extracted data from one repository as a column for the report.
     """
     # set all fields for the report
+
     extracted_data = {
-        'stars': repo_matadata.get('stargazers_count'),
-        'forks': repo_matadata.get('forks_count'),
-        'watchers': repo_matadata.get('subscribers_count'),
-        'releases': None,
-        'open issues': repo_matadata.get('open_issues_count'),
-        'closed issues': None, # no idea yet, have to research
-        'avg days until issue was closed': None, # well, I give up
-        'open PRs': None,
-        'closed PRs': None,
-        'avg days until PR was closed': None,
+        'stars': repo_metadata.get('stargazers_count'),
+        'forks': repo_metadata.get('forks_count'),
+        'watchers': repo_metadata.get('subscribers_count'),
+        'releases': repo_metadata.get('releases'),
+        'open issues': repo_metadata.get('open_issues_count'),
+        'closed issues': repo_metadata.get('closed_issues'),
+        'avg days until issue was closed': repo_metadata.get('avg_days_until_issue_was_closed'),
+        'open PRs': repo_metadata.get('open_PRs'),
+        'closed PRs': repo_metadata.get('closed_PRs'),
+        'avg days until PR was closed': repo_metadata.get('avg_days_until_pr_was_closed'),
     }
 
     return extracted_data
